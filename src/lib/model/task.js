@@ -8,6 +8,7 @@ const taskSchema=new Schema({
     isDone:{
         type:Boolean,
         required:false
-    }
+    },
+    
 });
 export default mongoose.models.Task || mongoose.model("Task",taskSchema);
