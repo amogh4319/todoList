@@ -56,7 +56,7 @@ function TodoForm(props) {
             }}
             className="shadow"
           />
-          <Button variant="outline-secondary" id="button-addon2" type="submit">
+          <Button variant="success" id="button-addon2" type="submit">
             + Add
           </Button>
         </InputGroup>
