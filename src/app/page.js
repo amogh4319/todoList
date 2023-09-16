@@ -1,34 +1,37 @@
-"use client";
-
-import TodoForm from '@/components/TodoForm'
-import TodoList from '@/components/TodoList'
 
 
-import { useState,Fragment } from 'react'
+import TodoForm from './TodoForm'
+import TodoList from './TodoList'
 
-export  default function Home() {
-  const [taskList,setTaskList]=useState([]);
-  const addHandler=(enteredTask)=>{
-    setTaskList((prevTask)=>{
-      return [...prevTask,{taskname:enteredTask,_id:Math.random().toString(),isCompleted:false}]
-    });
+import { Fragment} from 'react'
+async function getData() {
+  const res = await fetch('http://localhost:3000/api/tasklist ',{ cache: 'no-store' })
+ console.log(res);
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
   }
-  const deleteHandler = (taskId) => {
-    // Filter out the task with the given taskId from the taskList
-    const updatedTaskList = taskList.filter((task) => task._id !== taskId);
-    setTaskList(updatedTaskList);
-  };
+  
+ 
+  return res.json();
 
-  return (
+}
+ 
+
+
+export  default  async function Home() {
+
+const data=await getData();
+console.log(data);
+
+   return (
     <Fragment>
     
-      <TodoForm onAdd={addHandler}/>
-      <TodoList taskList={taskList} onDelete={deleteHandler}/>
+      <TodoForm taskList={data}/>
+      <TodoList taskList={data} />
       
     </Fragment>
-    
-    
-
-  )
+     )
     
 }
