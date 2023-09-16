@@ -5,7 +5,7 @@ import TodoList from './TodoList'
 
 import { Fragment} from 'react'
 async function getData() {
-  const res = await fetch('http://localhost:3000/api/tasklist ',{ cache: 'no-store' })
+  const res = await fetch('http://localhost:3000/api/tasklist ',{ cache: 'no-cache' })
  console.log(res);
  
   if (!res.ok) {
